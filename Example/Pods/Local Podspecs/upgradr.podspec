@@ -10,19 +10,16 @@
 Pod::Spec.new do |s|
   s.name             = "upgradr"
   s.version          = "0.1.0"
-  s.summary          = "A short description of upgradr."
+  s.summary          = "Upgradr client library."
   s.description      = <<-DESC
-                       An optional longer description of upgradr
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       Upgradr allows an app to prevent older versions running and to prompt for upgrades
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/upgradr"
+  s.homepage         = "https://github.com/deanWombourne/upgradr"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = 'MIT'
-  s.author           = { "Sam Dean" => "sam@oneblacksock.co.uk" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/upgradr.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.license          = ''
+  s.author           = { "Sam Dean" => "deanWombourne@gmail.com" }
+  s.source           = { :git => "https://github.com/deanWombourne/upgradr.git", :tag => s.version.to_s }
+  # s.social_media_url = 'https://twitter.com/deanWombourne'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true

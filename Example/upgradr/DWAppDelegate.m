@@ -8,6 +8,8 @@
 
 #import "DWAppDelegate.h"
 
+#import "DWUpgradr.h"
+
 @implementation DWAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
