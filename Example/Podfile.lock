@@ -22,10 +22,15 @@ PODS:
     - AFNetworking/NSURLSession
   - Expecta (0.3.1)
   - Specta (0.2.1)
-  - upgradr (0.1.0)
+  - upgradr (0.1.0):
+    - upgradr/Alert
+    - upgradr/Core
+  - upgradr/Alert (0.1.0):
+    - upgradr/Core (= 0.1.0)
+  - upgradr/Core (0.1.0):
+    - AFNetworking (~> 2.3)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.3)
   - Expecta
   - Specta (~> 0.2.1)
   - upgradr (from `../`)
@@ -38,6 +43,6 @@ SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
-  upgradr: 9854bebae4325097bde30575990d2e7a10774da6
+  upgradr: ef70612ba1ada9361e0e071defbe01409b8e6221
 
 COCOAPODS: 0.33.1

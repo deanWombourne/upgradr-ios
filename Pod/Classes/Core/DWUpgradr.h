@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DWResponse.h"
+
 extern NSString *DWUpgradrWillVerifyNotification;
 extern NSString *DWUpgradrDidVerifyNotification;
 extern NSString *DWUpgradrNotificationResponseKey;

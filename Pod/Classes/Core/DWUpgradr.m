@@ -80,7 +80,6 @@ NSString *DWUpgradrNotificationErrorKey = @"DWUpgradrNotificationErrorKey";
                               [[NSNotificationCenter defaultCenter] postNotificationName:DWUpgradrDidVerifyNotification
                                                                                   object:self
                                                                                 userInfo:@{ DWUpgradrNotificationResponseKey : response }];
-
                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                               self.task = nil;
 

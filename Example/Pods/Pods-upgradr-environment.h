@@ -54,3 +54,15 @@
 #define COCOAPODS_VERSION_MINOR_upgradr 1
 #define COCOAPODS_VERSION_PATCH_upgradr 0
 
+// upgradr/Alert
+#define COCOAPODS_POD_AVAILABLE_upgradr_Alert
+#define COCOAPODS_VERSION_MAJOR_upgradr_Alert 0
+#define COCOAPODS_VERSION_MINOR_upgradr_Alert 1
+#define COCOAPODS_VERSION_PATCH_upgradr_Alert 0
+
+// upgradr/Core
+#define COCOAPODS_POD_AVAILABLE_upgradr_Core
+#define COCOAPODS_VERSION_MAJOR_upgradr_Core 0
+#define COCOAPODS_VERSION_MINOR_upgradr_Core 1
+#define COCOAPODS_VERSION_PATCH_upgradr_Core 0
+
