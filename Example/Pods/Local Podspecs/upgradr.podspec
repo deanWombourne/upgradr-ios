@@ -14,18 +14,18 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        Upgradr allows an app to prevent older versions running and to prompt for upgrades
                        DESC
-  s.homepage         = "https://github.com/deanWombourne/upgradr"
+  s.homepage         = "https://github.com/deanWombourne/upgradr-ios"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
-  s.license          = ''
+  s.license          = { :type => 'APACHE-2.0', :file => 'LICENSE.md' }
   s.author           = { "Sam Dean" => "deanWombourne@gmail.com" }
-  s.source           = { :git => "https://github.com/deanWombourne/upgradr.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/deanWombourne/upgradr-ios.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/deanWombourne'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes'
-  s.resources = 'Pod/Assets/*.png'
+  # s.resources = 'Pod/Assets/*.png'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

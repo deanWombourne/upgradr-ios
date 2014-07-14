@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *DWUpgradrWillVerifyNotification;
+extern NSString *DWUpgradrDidVerifyNotification;
+extern NSString *DWUpgradrNotificationResponseKey;
+extern NSString *DWUpgradrNotificationErrorKey;
+
 @interface DWUpgradr : NSObject
+
+- (instancetype)initWithApplicationId:(NSString *)applicationId
+                            authToken:(NSString *)authToken;
+
+- (void)verify;
 
 @end

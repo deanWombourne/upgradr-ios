@@ -1,5 +1,7 @@
 target 'upgradr', :exclusive => true do
   pod "upgradr", :path => "../"
+
+  pod 'AFNetworking', '~> 2.3'
 end
 
 target 'Tests', :exclusive => true do
