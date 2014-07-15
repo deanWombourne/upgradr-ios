@@ -39,5 +39,11 @@ Pod::Spec.new do |s|
     ss.source_files = 'Pod/Classes/Alert'
     ss.dependency 'upgradr/Core', s.version.to_s
   end
+  
+  s.subspec 'Convenience' do |ss|
+    ss.source_files = 'Pod/Classes/Convenience'
+    ss.dependency 'upgradr/Core', s.version.to_s
+    ss.dependency 'upgradr/Alert', s.version.to_s
+  end
 
 end

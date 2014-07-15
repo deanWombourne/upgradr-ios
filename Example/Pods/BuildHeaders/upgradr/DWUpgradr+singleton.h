@@ -1,0 +1,1 @@
+../../../../Pod/Classes/Convenience/DWUpgradr+singleton.h

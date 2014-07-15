@@ -9,30 +9,20 @@
 #import "DWAppDelegate.h"
 
 #import "DWUpgradr.h"
-#import "DWAlertManager.h"
-
-@interface DWAppDelegate ()
-
-@property (nonatomic, strong) DWUpgradr *upgradr;
-@property (nonatomic, strong) DWAlertManager *alertManager;
-
-@end
+#import "DWUpgradr+singleton.h"
 
 @implementation DWAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Create our upgradr object and do an initial verify
-    self.upgradr = [[DWUpgradr alloc] initWithApplicationId:@"1"
-                                                  authToken:@"1"];
-    self.alertManager = [[DWAlertManager alloc] initWithUpgradr:self.upgradr];
-    [self.upgradr verify];
+    [DWUpgradr setApplicationId:@"1"];
+    [DWUpgradr setApplicationToken:@"1"];
+    [DWUpgradr verify];
 
     return YES;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Verify each time the app is opened again
-    [self.upgradr verify];
+    [DWUpgradr verify];
 }
 
 @end

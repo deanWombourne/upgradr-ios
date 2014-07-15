@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_upgradr_Alert 1
 #define COCOAPODS_VERSION_PATCH_upgradr_Alert 0
 
+// upgradr/Convenience
+#define COCOAPODS_POD_AVAILABLE_upgradr_Convenience
+#define COCOAPODS_VERSION_MAJOR_upgradr_Convenience 0
+#define COCOAPODS_VERSION_MINOR_upgradr_Convenience 1
+#define COCOAPODS_VERSION_PATCH_upgradr_Convenience 0
+
 // upgradr/Core
 #define COCOAPODS_POD_AVAILABLE_upgradr_Core
 #define COCOAPODS_VERSION_MAJOR_upgradr_Core 0
