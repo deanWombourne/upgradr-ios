@@ -39,6 +39,8 @@ NSString *DWUpgradrNotificationErrorKey = @"DWUpgradrNotificationErrorKey";
     if ((self = [super init])) {
         _applicationId = [applicationId copy];
         _authToken = [authToken copy];
+
+        NSLog(@"DWUpgradr: version %@", DWUpgradrVersionString);
     }
 
     return self;
@@ -66,7 +68,7 @@ NSString *DWUpgradrNotificationErrorKey = @"DWUpgradrNotificationErrorKey";
                                                         object:self];
 
     NSString *applicationVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    NSLog(@"DWUpgradr: Verify version %@", applicationVersion);
+    NSLog(@"DWUpgradr: Verifying app version %@", applicationVersion);
 
     NSString *path = [NSString stringWithFormat:@"apps/%@/verify", self.applicationId];
     NSDictionary *parameters = @{ @"api_token" : self.authToken, 

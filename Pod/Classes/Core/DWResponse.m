@@ -61,4 +61,31 @@ NSString *NSStringFromDWResponseStatus(const DWResponseStatus status) {
     return self.message.hash;
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
+@end
+
+@implementation DWResponse (coding)
+
+static NSString *DWResponseCodingStatusKey = @"s";
+static NSString *DWResponseCodingMessageKey = @"m";
+static NSString *DWResponseCodingVersionKey = @"v";
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeInteger:self.status forKey:DWResponseCodingStatusKey];
+    [aCoder encodeObject:self.message forKey:DWResponseCodingMessageKey];
+    [aCoder encodeObject:self.currentVersion forKey:DWResponseCodingVersionKey];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super init])) {
+        _status = [aDecoder decodeIntegerForKey:DWResponseCodingStatusKey];
+        _message = [[aDecoder decodeObjectForKey:DWResponseCodingMessageKey] copy];
+        _currentVersion = [[aDecoder decodeObjectForKey:DWResponseCodingVersionKey] copy];
+    }
+    return self;
+}
+
 @end

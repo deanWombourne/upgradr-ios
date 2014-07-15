@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, DWResponseStatus) {
 
 extern NSString *NSStringFromDWResponseStatus(const DWResponseStatus status);
 
-@interface DWResponse : NSObject
+@interface DWResponse : NSObject <NSCopying>
 
 - (instancetype)initWithStatus:(DWResponseStatus)status
                        message:(NSString *)message
@@ -25,5 +25,9 @@ extern NSString *NSStringFromDWResponseStatus(const DWResponseStatus status);
 @property (nonatomic, readonly, assign) DWResponseStatus status;
 @property (nonatomic, readonly, copy) NSString *message;
 @property (nonatomic, readonly, copy) NSString *currentVersion;
+
+@end
+
+@interface DWResponse (coding) <NSCoding>
 
 @end

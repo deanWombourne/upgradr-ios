@@ -10,6 +10,8 @@
 
 #import "DWResponse.h"
 
+#define DWUpgradrVersionString @"0.1.0"
+
 extern NSString *DWUpgradrWillVerifyNotification;
 extern NSString *DWUpgradrDidVerifyNotification;
 extern NSString *DWUpgradrNotificationResponseKey;
