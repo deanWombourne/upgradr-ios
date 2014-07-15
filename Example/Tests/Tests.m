@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Sam Dean. All rights reserved.
 //
 
+#if 0
+
 SpecBegin(InitialSpecs)
 
 describe(@"these will fail", ^{
-
     it(@"can do maths", ^{
         expect(1).to.equal(2);
     });
@@ -41,3 +42,5 @@ describe(@"these will pass", ^{
 });
 
 SpecEnd
+
+#endif
