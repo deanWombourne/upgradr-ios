@@ -22,10 +22,12 @@ NSString *NSStringFromDWResponseStatus(const DWResponseStatus status) {
 @implementation DWResponse
 
 - (instancetype)initWithStatus:(DWResponseStatus)status
-                       message:(NSString *)message {
+                       message:(NSString *)message
+                currentVersion:(NSString *)currentVersion {
     if ((self = [super init])) {
         _status = status;
         _message = [message copy];
+        _currentVersion = [currentVersion copy];
     }
 
     return self;
@@ -33,10 +35,11 @@ NSString *NSStringFromDWResponseStatus(const DWResponseStatus status) {
 
 - (NSString *)description {
     NSString *message = _message.length > 10 ? [_message substringToIndex:10] : _message;
-    return [NSString stringWithFormat:@"<%@:0x08%lx %@ '%@'>",
+    return [NSString stringWithFormat:@"<%@:0x08%lx %@ (current=%@) '%@'>",
             NSStringFromClass([self class]),
             (unsigned long)self,
             NSStringFromDWResponseStatus(_status),
+            _currentVersion,
             message
             ];
 }
@@ -50,7 +53,8 @@ NSString *NSStringFromDWResponseStatus(const DWResponseStatus status) {
 
 - (BOOL)isEqualToResponse:(DWResponse *)response {
     return (response.status == self.status &&
-            [response.message isEqualToString:self.message]);
+            [response.message isEqualToString:self.message] &&
+            [response.currentVersion isEqualToString:self.currentVersion]);
 }
 
 - (NSUInteger)hash {

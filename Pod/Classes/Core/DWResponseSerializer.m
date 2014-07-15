@@ -40,7 +40,9 @@ NSString *DWResponseSerializerErrorDomain = @"DWResponseSerializerErrorDomain";
     // Are the fields the correct format?
     NSString *statusString = dictionary[@"status"];
     NSString *message = dictionary[@"message"];
+    NSString *currentVersion = dictionary[@"current_version"];
     if (![statusString isKindOfClass:[NSString class]] ||
+        ![message isKindOfClass:[NSString class]] ||
         ![message isKindOfClass:[NSString class]]) {
         if (error)
             *error = [NSError errorWithDomain:DWResponseSerializerErrorDomain
@@ -65,7 +67,8 @@ NSString *DWResponseSerializerErrorDomain = @"DWResponseSerializerErrorDomain";
     if (error)
         *error = nil;
     return [[DWResponse alloc] initWithStatus:status
-                                      message:message];
+                                      message:message
+                               currentVersion:currentVersion];
 }
 
 @end

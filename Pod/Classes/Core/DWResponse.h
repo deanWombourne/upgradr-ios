@@ -19,9 +19,11 @@ extern NSString *NSStringFromDWResponseStatus(const DWResponseStatus status);
 @interface DWResponse : NSObject
 
 - (instancetype)initWithStatus:(DWResponseStatus)status
-                       message:(NSString *)message;
+                       message:(NSString *)message
+                currentVersion:(NSString *)currentVersion;
 
 @property (nonatomic, readonly, assign) DWResponseStatus status;
 @property (nonatomic, readonly, copy) NSString *message;
+@property (nonatomic, readonly, copy) NSString *currentVersion;
 
 @end

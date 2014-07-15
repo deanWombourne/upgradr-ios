@@ -12,6 +12,6 @@
 
 @interface DWAlertView : UIAlertView
 
-@property (nonatomic, assign) DWResponseStatus responseStatus;
+@property (nonatomic, strong) DWResponse *response;
 
 @end

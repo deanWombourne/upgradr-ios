@@ -12,13 +12,19 @@
 
 #import "NSString+app_store.h"
 
+static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersionsKey";
+
 @interface DWAlertManager () <UIAlertViewDelegate>
 
 @property (nonatomic, readonly, strong) DWUpgradr *upgradr;
 
+@property (nonatomic, copy) NSSet *skippedVersions;
+
 @end
 
 @implementation DWAlertManager
+
+@synthesize skippedVersions = _skippedVersions;
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -36,6 +42,27 @@
     return self;
 }
 
+- (NSSet *)skippedVersions {
+    if (nil == _skippedVersions) {
+        NSArray *temp = [[NSUserDefaults standardUserDefaults] objectForKey:DWAlertManagerSkippedVersionsKey];
+        if (NO == [temp isKindOfClass:[NSArray class]])
+            temp = @[];
+        _skippedVersions = [NSSet setWithArray:temp];
+    }
+    return _skippedVersions;
+}
+
+- (void)setSkippedVersions:(NSSet *)skippedVersions {
+    if (skippedVersions != _skippedVersions) {
+        _skippedVersions = [skippedVersions copy];
+
+        if (_skippedVersions)
+            [[NSUserDefaults standardUserDefaults] setObject:[skippedVersions allObjects] forKey:DWAlertManagerSkippedVersionsKey];
+        else
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:DWAlertManagerSkippedVersionsKey];
+    }
+}
+
 - (void)upgradrDidVerify:(NSNotification *)notification {
     DWResponse *response = notification.userInfo[DWUpgradrNotificationResponseKey];
     if (nil == response) {
@@ -44,21 +71,12 @@
         return;
     }
 
-    [self presentAlertWithResponse:response];
-}
-
-- (void)presentAlertWithResponse:(DWResponse *)response {
-    switch(response.status) {
-        case DWResponseStatusOK:
-            break;
-
-        case DWResponseStatusRequired:
-            [self presentRequiredAlertWithResponse:response];
-            break;
-
-        case DWResponseStatusOptional:
-            [self presentOptionalAlertWithResponse:response];
-            break;
+    if (response.status == DWResponseStatusOK) {
+        // If it's OK then we don't have to do anything
+    } else if (response.status == DWResponseStatusRequired) {
+        [self presentRequiredAlertWithResponse:response];
+    } else if (NO == [self.skippedVersions containsObject:response.currentVersion]) {
+        [self presentOptionalAlertWithResponse:response];
     }
 }
 
@@ -68,7 +86,7 @@
                                                    delegate:self
                                           cancelButtonTitle:@"Upgrade"
                                           otherButtonTitles:nil];
-    alert.responseStatus = response.status;
+    alert.response = response;
     [alert show];
 
 }
@@ -79,11 +97,11 @@
                                                    delegate:self
                                           cancelButtonTitle:@"Upgrade"
                                           otherButtonTitles:@"Skip", nil];
-    alert.responseStatus = response.status;
+    alert.response = response;
     [alert show];
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)alertView:(DWAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     // Cancel is always upgrade
     if (buttonIndex == alertView.cancelButtonIndex) {
         NSString *name = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
@@ -91,6 +109,11 @@
         NSURL *url = [NSURL URLWithString:path];
         NSLog(@"Opening upgrade URL : %@", [url absoluteString]);
         [[UIApplication sharedApplication] openURL:url];
+    }
+
+    // If we are skipping, then store that we don't want this update again
+    else if (alertView.response.status == DWResponseStatusOptional) {
+        self.skippedVersions = [self.skippedVersions setByAddingObject:alertView.response.currentVersion];
     }
 }
 
