@@ -14,11 +14,17 @@
 
 static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersionsKey";
 
+static NSString *DWAlertMAnagerStringTable = @"DWUpgradr-Alert";
+
+#define DWLocalizedString(key) [self.resourceBundle localizedStringForKey:key value:@"" table:DWAlertMAnagerStringTable]
+
 @interface DWUpgradrAlertManager () <UIAlertViewDelegate>
 
 @property (nonatomic, readonly, strong) DWUpgradr *upgradr;
 
 @property (nonatomic, copy) NSSet *skippedVersions;
+
+@property (nonatomic, strong) NSBundle *resourceBundle;
 
 @end
 
@@ -33,6 +39,9 @@ static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersi
 - (instancetype)initWithUpgradr:(DWUpgradr *)upgradr {
     if ((self = [super init])) {
         _upgradr = upgradr;
+
+        NSString *resourceBundlePath = [[NSBundle mainBundle] pathForResource:@"DWUpgradr-Alert" ofType:@"bundle"];
+        self.resourceBundle = [NSBundle bundleWithPath:resourceBundlePath];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(upgradrDidVerify:)
@@ -83,22 +92,22 @@ static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersi
 }
 
 - (void)presentRequiredAlertWithResponse:(DWUpgradrResponse *)response {
-    DWUpgradrAlertView *alert = [[DWUpgradrAlertView alloc] initWithTitle:@"Upgrade Required"
-                                                    message:response.message
-                                                   delegate:self
-                                          cancelButtonTitle:@"Upgrade"
-                                          otherButtonTitles:nil];
+    DWUpgradrAlertView *alert = [[DWUpgradrAlertView alloc] initWithTitle:DWLocalizedString(@"upgradr-alert-title-required")
+                                                                  message:response.message
+                                                                 delegate:self
+                                                        cancelButtonTitle:DWLocalizedString(@"upgradr-alert-button-upgrade")
+                                                        otherButtonTitles:nil];
     alert.response = response;
     [alert show];
 
 }
 
 - (void)presentOptionalAlertWithResponse:(DWUpgradrResponse *)response {
-    DWUpgradrAlertView *alert = [[DWUpgradrAlertView alloc] initWithTitle:@"Upgrade Optional"
-                                                    message:response.message
-                                                   delegate:self
-                                          cancelButtonTitle:@"Upgrade"
-                                          otherButtonTitles:@"Skip", nil];
+    DWUpgradrAlertView *alert = [[DWUpgradrAlertView alloc] initWithTitle:DWLocalizedString(@"upgradr-alert-title-optional")
+                                                                  message:response.message
+                                                                 delegate:self
+                                                        cancelButtonTitle:DWLocalizedString(@"upgradr-alert-button-upgrade")
+                                                        otherButtonTitles:DWLocalizedString(@"upgradr-alert-button-skip"), nil];
     alert.response = response;
     [alert show];
 }

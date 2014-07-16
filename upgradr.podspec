@@ -38,6 +38,7 @@ Pod::Spec.new do |s|
   s.subspec 'Alert' do |ss|
     ss.source_files = 'Pod/Classes/Alert'
     ss.dependency 'upgradr/Core', s.version.to_s
+    ss.resource_bundle = { 'DWUpgradr-Alert' => ['Pod/Assets/Alert/*.lproj'] }
   end
   
   s.subspec 'Convenience' do |ss|

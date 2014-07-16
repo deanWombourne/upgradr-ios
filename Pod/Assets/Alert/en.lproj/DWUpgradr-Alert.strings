@@ -1,0 +1,13 @@
+/*
+  Upgradr-Localizable.strings
+  
+
+  Created by Sam Dean on 16/07/2014.
+
+*/
+
+"upgradr-alert-title-optional" = "Upgrade Optional";
+"upgradr-alert-title-required" = "Upgrade Required";
+
+"upgradr-alert-button-upgrade" = "Upgrade";
+"upgradr-alert-button-skip" = "Skip";
