@@ -6,23 +6,23 @@
 //
 //
 
-#import "DWResponseSerializer.h"
+#import "DWUpgradrResponseSerializer.h"
 
-static const int DWResponseStatusError = INT_MAX;
+static const int DWUpgradrResponseStatusError = INT_MAX;
 
-NSString *DWResponseSerializerErrorDomain = @"DWResponseSerializerErrorDomain";
+NSString *DWUpgradrResponseSerializerErrorDomain = @"DWUpgradrResponseSerializerErrorDomain";
 
-@implementation DWResponseSerializer
+@implementation DWUpgradrResponseSerializer
 
-- (DWResponseStatus)responseStatusFromString:(NSString *)string {
+- (DWUpgradrResponseStatus)responseStatusFromString:(NSString *)string {
     if ([string isEqualToString:@"OK"])
-        return DWResponseStatusOK;
+        return DWUpgradrResponseStatusOK;
     if ([string isEqualToString:@"OPTIONAL"])
-        return DWResponseStatusOptional;
+        return DWUpgradrResponseStatusOptional;
     if ([string isEqualToString:@"REQUIRED"])
-        return DWResponseStatusRequired;
+        return DWUpgradrResponseStatusRequired;
 
-    return DWResponseStatusError;
+    return DWUpgradrResponseStatusError;
 }
 
 - (id)responseObjectForResponse:(NSURLResponse *)response
@@ -45,7 +45,7 @@ NSString *DWResponseSerializerErrorDomain = @"DWResponseSerializerErrorDomain";
         ![message isKindOfClass:[NSString class]] ||
         ![message isKindOfClass:[NSString class]]) {
         if (error)
-            *error = [NSError errorWithDomain:DWResponseSerializerErrorDomain
+            *error = [NSError errorWithDomain:DWUpgradrResponseSerializerErrorDomain
                                          code:0
                                      userInfo:@{ NSLocalizedDescriptionKey : @"Failed to parse server response",
                                                  NSLocalizedFailureReasonErrorKey : @"message or status were not the correct format" }];
@@ -53,10 +53,10 @@ NSString *DWResponseSerializerErrorDomain = @"DWResponseSerializerErrorDomain";
     }
 
     // Can we parse the status string?
-    DWResponseStatus status = [self responseStatusFromString:statusString];
-    if (DWResponseStatusError == status) {
+    DWUpgradrResponseStatus status = [self responseStatusFromString:statusString];
+    if (DWUpgradrResponseStatusError == status) {
         if (error)
-            *error = [NSError errorWithDomain:DWResponseSerializerErrorDomain
+            *error = [NSError errorWithDomain:DWUpgradrResponseSerializerErrorDomain
                                          code:0
                                      userInfo:@{ NSLocalizedDescriptionKey : @"Failed to parse server response",
                                                  NSLocalizedFailureReasonErrorKey : @"unknown status found" }];
@@ -66,7 +66,7 @@ NSString *DWResponseSerializerErrorDomain = @"DWResponseSerializerErrorDomain";
     // Return a successful response object
     if (error)
         *error = nil;
-    return [[DWResponse alloc] initWithStatus:status
+    return [[DWUpgradrResponse alloc] initWithStatus:status
                                       message:message
                                currentVersion:currentVersion];
 }

@@ -1,11 +1,11 @@
-#import "DWResponse.h"
+#import "DWUpgradrResponse.h"
 
 SpecBegin(DWResponseSpecs)
 
 describe(@"initialization", ^{
 
     it(@"can be initialized", ^{
-        DWResponse *response = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                           message:@"This is OK"
                                                    currentVersion:@"1.0.0"];
         expect(response).notTo.beNil;
@@ -19,14 +19,14 @@ describe(@"initialization", ^{
 describe(@"coding", ^{
 
     it(@"can be coded and decoded", ^{
-        DWResponse *response1 = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response1 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                            message:@"This is OK"
                                                     currentVersion:@"1.0.0"];
 
         id data = [NSKeyedArchiver archivedDataWithRootObject:response1];
         expect(data).notTo.beNil;
 
-        DWResponse *response2 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        DWUpgradrResponse *response2 = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         expect(response2).notTo.beNil;
 
         expect(response1).to.equal(response2);
@@ -37,10 +37,10 @@ describe(@"coding", ^{
 describe(@"equality", ^{
 
     it(@"can be equal", ^{
-        DWResponse *response1 = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response1 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                            message:@"This is OK"
                                                     currentVersion:@"1.0.0"];
-        DWResponse *response2 = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response2 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                            message:@"This is OK"
                                                     currentVersion:@"1.0.0"];
 
@@ -48,10 +48,10 @@ describe(@"equality", ^{
     });
 
     it(@"can be unequal with status", ^{
-        DWResponse *response1 = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response1 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                            message:@"This is OK"
                                                     currentVersion:@"1.0.0"];
-        DWResponse *response2 = [[DWResponse alloc] initWithStatus:DWResponseStatusOptional
+        DWUpgradrResponse *response2 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOptional
                                                            message:@"This is OK"
                                                     currentVersion:@"1.0.0"];
 
@@ -59,10 +59,10 @@ describe(@"equality", ^{
     });
 
     it(@"can be unequal with message", ^{
-        DWResponse *response1 = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response1 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                            message:@"This is OK"
                                                     currentVersion:@"1.0.0"];
-        DWResponse *response2 = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response2 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                            message:@"This is Not OK"
                                                     currentVersion:@"1.0.0"];
 
@@ -70,10 +70,10 @@ describe(@"equality", ^{
     });
 
     it(@"can be unequal with current version", ^{
-        DWResponse *response1 = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response1 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                            message:@"This is OK"
                                                     currentVersion:@"1.0.0"];
-        DWResponse *response2 = [[DWResponse alloc] initWithStatus:DWResponseStatusOK
+        DWUpgradrResponse *response2 = [[DWUpgradrResponse alloc] initWithStatus:DWResponseStatusOK
                                                            message:@"This is OK"
                                                     currentVersion:@"1.0.1"];
 

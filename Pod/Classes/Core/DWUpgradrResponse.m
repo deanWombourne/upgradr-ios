@@ -6,22 +6,22 @@
 //
 //
 
-#import "DWResponse.h"
+#import "DWUpgradrResponse.h"
 
-NSString *NSStringFromDWResponseStatus(const DWResponseStatus status) {
+NSString *NSStringFromDWResponseStatus(const DWUpgradrResponseStatus status) {
     switch (status) {
-        case DWResponseStatusOK:
+        case DWUpgradrResponseStatusOK:
             return @"OK";
-        case DWResponseStatusOptional:
+        case DWUpgradrResponseStatusOptional:
             return @"OPTIONAL";
-        case DWResponseStatusRequired:
+        case DWUpgradrResponseStatusRequired:
             return @"REQUIRED";
     }
 }
 
-@implementation DWResponse
+@implementation DWUpgradrResponse
 
-- (instancetype)initWithStatus:(DWResponseStatus)status
+- (instancetype)initWithStatus:(DWUpgradrResponseStatus)status
                        message:(NSString *)message
                 currentVersion:(NSString *)currentVersion {
     if ((self = [super init])) {
@@ -51,7 +51,7 @@ NSString *NSStringFromDWResponseStatus(const DWResponseStatus status) {
     return [self isEqualToResponse:object];
 }
 
-- (BOOL)isEqualToResponse:(DWResponse *)response {
+- (BOOL)isEqualToResponse:(DWUpgradrResponse *)response {
     return (response.status == self.status &&
             [response.message isEqualToString:self.message] &&
             [response.currentVersion isEqualToString:self.currentVersion]);
@@ -67,7 +67,7 @@ NSString *NSStringFromDWResponseStatus(const DWResponseStatus status) {
 
 @end
 
-@implementation DWResponse (coding)
+@implementation DWUpgradrResponse (coding)
 
 static NSString *DWResponseCodingStatusKey = @"s";
 static NSString *DWResponseCodingMessageKey = @"m";

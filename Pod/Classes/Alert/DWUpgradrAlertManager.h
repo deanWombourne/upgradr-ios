@@ -10,7 +10,7 @@
 
 #import "DWUpgradr.h"
 
-@interface DWAlertManager : NSObject
+@interface DWUpgradrAlertManager : NSObject
 
 - (instancetype)initWithUpgradr:(DWUpgradr *)upgradr;
 

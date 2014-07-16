@@ -6,15 +6,15 @@
 //
 //
 
-#import "DWAlertManager.h"
+#import "DWUpgradrAlertManager.h"
 
-#import "DWAlertView.h"
+#import "DWUpgradrAlertView.h"
 
 #import "NSString+app_store.h"
 
 static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersionsKey";
 
-@interface DWAlertManager () <UIAlertViewDelegate>
+@interface DWUpgradrAlertManager () <UIAlertViewDelegate>
 
 @property (nonatomic, readonly, strong) DWUpgradr *upgradr;
 
@@ -22,7 +22,7 @@ static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersi
 
 @end
 
-@implementation DWAlertManager
+@implementation DWUpgradrAlertManager
 
 @synthesize skippedVersions = _skippedVersions;
 
@@ -64,24 +64,26 @@ static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersi
 }
 
 - (void)upgradrDidVerify:(NSNotification *)notification {
-    DWResponse *response = notification.userInfo[DWUpgradrNotificationResponseKey];
+    DWUpgradrResponse *response = notification.userInfo[DWUpgradrNotificationResponseKey];
     if (nil == response) {
         NSError *error = notification.userInfo[DWUpgradrNotificationErrorKey];
         NSLog(@"Failed to verify with error : %@", error);
         return;
     }
 
-    if (response.status == DWResponseStatusOK) {
+    if (response.status == DWUpgradrResponseStatusOK) {
         // If it's OK then we don't have to do anything
-    } else if (response.status == DWResponseStatusRequired) {
+    } else if (response.status == DWUpgradrResponseStatusRequired) {
         [self presentRequiredAlertWithResponse:response];
     } else if (NO == [self.skippedVersions containsObject:response.currentVersion]) {
         [self presentOptionalAlertWithResponse:response];
+    } else {
+        NSLog(@"DWUpgradrAlert: Skipping version %@", response.currentVersion);
     }
 }
 
-- (void)presentRequiredAlertWithResponse:(DWResponse *)response {
-    DWAlertView *alert = [[DWAlertView alloc] initWithTitle:@"Upgrade Required"
+- (void)presentRequiredAlertWithResponse:(DWUpgradrResponse *)response {
+    DWUpgradrAlertView *alert = [[DWUpgradrAlertView alloc] initWithTitle:@"Upgrade Required"
                                                     message:response.message
                                                    delegate:self
                                           cancelButtonTitle:@"Upgrade"
@@ -91,8 +93,8 @@ static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersi
 
 }
 
-- (void)presentOptionalAlertWithResponse:(DWResponse *)response {
-    DWAlertView *alert = [[DWAlertView alloc] initWithTitle:@"Upgrade Optional"
+- (void)presentOptionalAlertWithResponse:(DWUpgradrResponse *)response {
+    DWUpgradrAlertView *alert = [[DWUpgradrAlertView alloc] initWithTitle:@"Upgrade Optional"
                                                     message:response.message
                                                    delegate:self
                                           cancelButtonTitle:@"Upgrade"
@@ -101,7 +103,7 @@ static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersi
     [alert show];
 }
 
-- (void)alertView:(DWAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)alertView:(DWUpgradrAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     // Cancel is always upgrade
     if (buttonIndex == alertView.cancelButtonIndex) {
         NSString *name = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
@@ -112,7 +114,7 @@ static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersi
     }
 
     // If we are skipping, then store that we don't want this update again
-    else if (alertView.response.status == DWResponseStatusOptional) {
+    else if (alertView.response.status == DWUpgradrResponseStatusOptional) {
         self.skippedVersions = [self.skippedVersions setByAddingObject:alertView.response.currentVersion];
     }
 }

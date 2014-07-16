@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DWResponse.h"
+#import "DWUpgradrResponse.h"
 
 #define DWUpgradrVersionString @"0.1.0"
 

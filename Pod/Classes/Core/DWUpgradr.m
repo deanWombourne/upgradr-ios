@@ -9,7 +9,7 @@
 #import "DWUpgradr.h"
 
 #import "AFHTTPSessionManager.h"
-#import "DWResponseSerializer.h"
+#import "DWUpgradrResponseSerializer.h"
 
 NSString *DWUpgradrWillVerifyNotification = @"DWUpgradrWillVerifyNotification";
 NSString *DWUpgradrDidVerifyNotification = @"DWUpgradrDidVerifyNotification";
@@ -56,7 +56,7 @@ NSString *DWUpgradrNotificationErrorKey = @"DWUpgradrNotificationErrorKey";
         NSURL *baseURL = [NSURL URLWithString:@"http://127.0.0.1:5000/api"];//@"https://upgradr.herokuapp.com/api"];
         _manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
         _manager.requestSerializer = [[AFJSONRequestSerializer alloc] init];
-        _manager.responseSerializer = [[DWResponseSerializer alloc] init];
+        _manager.responseSerializer = [[DWUpgradrResponseSerializer alloc] init];
     }
     return _manager;
 }
@@ -76,7 +76,7 @@ NSString *DWUpgradrNotificationErrorKey = @"DWUpgradrNotificationErrorKey";
 
     self.task = [self.manager GET:path
                        parameters:parameters
-                          success:^(NSURLSessionDataTask *task, DWResponse *response) {
+                          success:^(NSURLSessionDataTask *task, DWUpgradrResponse *response) {
                               self.task = nil;
 
                               [[NSNotificationCenter defaultCenter] postNotificationName:DWUpgradrDidVerifyNotification
@@ -84,6 +84,8 @@ NSString *DWUpgradrNotificationErrorKey = @"DWUpgradrNotificationErrorKey";
                                                                                 userInfo:@{ DWUpgradrNotificationResponseKey : response }];
                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                               self.task = nil;
+
+                              NSLog(@"DWUpgradr: Failed to verify - %@", error.localizedDescription);
 
                               [[NSNotificationCenter defaultCenter] postNotificationName:DWUpgradrDidVerifyNotification
                                                                                   object:self

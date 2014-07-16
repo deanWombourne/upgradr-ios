@@ -8,7 +8,7 @@
 
 #import "DWUpgradr+singleton.h"
 
-#import "DWAlertManager.h"
+#import "DWUpgradrAlertManager.h"
 
 static NSString *applicationId = nil;
 static NSString *token = nil;
@@ -26,11 +26,11 @@ static NSString *token = nil;
 + (DWUpgradr *)sharedInstance {
     static dispatch_once_t onceToken;
     static DWUpgradr *instance = nil;
-    static DWAlertManager *manager = nil;
+    static DWUpgradrAlertManager *manager = nil;
     dispatch_once(&onceToken, ^{
         instance = [[DWUpgradr alloc] initWithApplicationId:applicationId
                                                   authToken:token];
-        manager = [[DWAlertManager alloc] initWithUpgradr:instance];
+        manager = [[DWUpgradrAlertManager alloc] initWithUpgradr:instance];
     });
 
     return instance;

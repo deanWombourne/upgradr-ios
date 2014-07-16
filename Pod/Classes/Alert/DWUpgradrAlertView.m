@@ -6,8 +6,8 @@
 //
 //
 
-#import "DWAlertView.h"
+#import "DWUpgradrAlertView.h"
 
-@implementation DWAlertView
+@implementation DWUpgradrAlertView
 
 @end
