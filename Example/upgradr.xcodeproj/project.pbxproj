@@ -24,6 +24,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		A0FDBD74197524E600335CD1 /* DWUpgradrResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FDBD72197523A200335CD1 /* DWUpgradrResponseTests.m */; };
+		A0FDBD7B19766A6C00335CD1 /* DWUpgradrResponseSerializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FDBD7819766A5D00335CD1 /* DWUpgradrResponseSerializerTests.m */; };
 		C5787910B3814B8485AEFC13 /* libPods-upgradr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7B70CF18FBA47B1A3E3D5C4 /* libPods-upgradr.a */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		7BC1617FF5724F3FAFBDC7C2 /* upgradr.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = upgradr.podspec; path = ../upgradr.podspec; sourceTree = "<group>"; };
 		A0FDBD59197308F700335CD1 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE.md; path = ../LICENSE.md; sourceTree = "<group>"; };
 		A0FDBD72197523A200335CD1 /* DWUpgradrResponseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWUpgradrResponseTests.m; sourceTree = "<group>"; };
+		A0FDBD7819766A5D00335CD1 /* DWUpgradrResponseSerializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DWUpgradrResponseSerializerTests.m; sourceTree = "<group>"; };
 		C7B70CF18FBA47B1A3E3D5C4 /* libPods-upgradr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-upgradr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AA5AF6CB59435688A546E5 /* Pods-upgradr.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-upgradr.xcconfig"; path = "Pods/Pods-upgradr.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +164,7 @@
 			children = (
 				6003F5BB195388D20070C39A /* Tests.m */,
 				A0FDBD72197523A200335CD1 /* DWUpgradrResponseTests.m */,
+				A0FDBD7819766A5D00335CD1 /* DWUpgradrResponseSerializerTests.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -364,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0FDBD7B19766A6C00335CD1 /* DWUpgradrResponseSerializerTests.m in Sources */,
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
 				A0FDBD74197524E600335CD1 /* DWUpgradrResponseTests.m in Sources */,
 			);
