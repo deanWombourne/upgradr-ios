@@ -12,11 +12,11 @@
 
 #import "NSString+app_store.h"
 
-static NSString *DWAlertManagerSkippedVersionsKey = @"DWAlertManagerSkippedVersionsKey";
+static NSString *DWUpgradrAlertManagerSkippedVersionsKey = @"DWUpgradrAlertManagerSkippedVersionsKey";
 
-static NSString *DWAlertMAnagerStringTable = @"DWUpgradr-Alert";
+static NSString *DWUpgradrAlertManagerStringTable = @"DWUpgradr-Alert";
 
-#define DWLocalizedString(key) [self.resourceBundle localizedStringForKey:key value:@"" table:DWAlertMAnagerStringTable]
+#define DWLocalizedString(key) [self.resourceBundle localizedStringForKey:key value:@"" table:DWUpgradrAlertManagerStringTable]
 
 @interface DWUpgradrAlertManager () <UIAlertViewDelegate>
 
@@ -53,7 +53,7 @@ static NSString *DWAlertMAnagerStringTable = @"DWUpgradr-Alert";
 
 - (NSSet *)skippedVersions {
     if (nil == _skippedVersions) {
-        NSArray *temp = [[NSUserDefaults standardUserDefaults] objectForKey:DWAlertManagerSkippedVersionsKey];
+        NSArray *temp = [[NSUserDefaults standardUserDefaults] objectForKey:DWUpgradrAlertManagerSkippedVersionsKey];
         if (NO == [temp isKindOfClass:[NSArray class]])
             temp = @[];
         _skippedVersions = [NSSet setWithArray:temp];
@@ -66,9 +66,9 @@ static NSString *DWAlertMAnagerStringTable = @"DWUpgradr-Alert";
         _skippedVersions = [skippedVersions copy];
 
         if (_skippedVersions)
-            [[NSUserDefaults standardUserDefaults] setObject:[skippedVersions allObjects] forKey:DWAlertManagerSkippedVersionsKey];
+            [[NSUserDefaults standardUserDefaults] setObject:[skippedVersions allObjects] forKey:DWUpgradrAlertManagerSkippedVersionsKey];
         else
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:DWAlertManagerSkippedVersionsKey];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:DWUpgradrAlertManagerSkippedVersionsKey];
     }
 }
 
